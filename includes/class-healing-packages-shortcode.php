@@ -103,36 +103,8 @@ class Healing_Packages_Shortcode {
      */
     protected function render_card( $post_id ) {
         $template = $this->template->get_template( 'package-card.php' );
-        $settings = healing_packages_get_settings();
+        $data     = healing_packages_collect_package_data( $post_id );
 
-        $data = [
-            'package_name'    => get_the_title( $post_id ),
-            'hospital_name'   => get_post_meta( $post_id, '_hp_hospital_name', true ),
-            'procedure_type'  => get_post_meta( $post_id, '_hp_procedure_type', true ),
-            'hotel_category'  => get_post_meta( $post_id, '_hp_hotel_category', true ),
-            'general_desc'    => get_post_meta( $post_id, '_hp_general_desc', true ),
-            'services'        => healing_packages_text_to_list( get_post_meta( $post_id, '_hp_additional_services', true ) ),
-            'trip_duration'   => get_post_meta( $post_id, '_hp_trip_duration', true ),
-            'cities'          => get_post_meta( $post_id, '_hp_cities', true ),
-            'included_icons'  => healing_packages_text_to_list( get_post_meta( $post_id, '_hp_included_icons', true ) ),
-            'whatsapp_number' => get_post_meta( $post_id, '_hp_whatsapp_number', true ),
-            'message_template'=> get_post_meta( $post_id, '_hp_message_template', true ),
-            'settings'        => $settings,
-        ];
-
-        $data['whatsapp_url'] = healing_packages_build_whatsapp_url(
-            [
-                'package_name'     => $data['package_name'],
-                'hospital'         => $data['hospital_name'],
-                'procedure_type'   => $data['procedure_type'],
-                'hotel_category'   => $data['hotel_category'],
-                'whatsapp_number'  => $data['whatsapp_number'],
-                'message_template' => $data['message_template'],
-            ],
-            $settings
-        );
-
-        $data['button_text'] = $settings['button_text'];
 
         include $template;
     }
