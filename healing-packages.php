@@ -23,6 +23,7 @@ require_once HEALING_PACKAGES_PATH . 'includes/class-healing-packages-cpt.php';
 require_once HEALING_PACKAGES_PATH . 'includes/class-healing-packages-metaboxes.php';
 require_once HEALING_PACKAGES_PATH . 'includes/class-healing-packages-settings.php';
 require_once HEALING_PACKAGES_PATH . 'includes/class-healing-packages-template.php';
+require_once HEALING_PACKAGES_PATH . 'includes/class-healing-packages-documentation.php';
 require_once HEALING_PACKAGES_PATH . 'includes/class-healing-packages-shortcode.php';
 
 /**
@@ -34,6 +35,7 @@ function healing_packages_init() {
     $settings   = new Healing_Packages_Settings();
     $assets     = new Healing_Packages_Assets();
     $template   = new Healing_Packages_Template();
+    $docs       = new Healing_Packages_Documentation();
     $shortcodes = new Healing_Packages_Shortcode( $template );
 
     $cpt->register_hooks();
@@ -41,6 +43,7 @@ function healing_packages_init() {
     $settings->register_hooks();
     $assets->register_hooks();
     $template->register_hooks();
+    $docs->register_hooks();
     $shortcodes->register_hooks();
 }
 add_action( 'plugins_loaded', 'healing_packages_init' );
